@@ -1,0 +1,14 @@
+names:
+- Bowl
+- Cup
+- Plate
+nc: 3
+roboflow:
+  license: CC BY 4.0
+  project: cup-bowl-detection
+  url: https://universe.roboflow.com/2lineok-kph8w/cup-bowl-detection/dataset/1
+  version: 1
+  workspace: 2lineok-kph8w
+test: /home/skl5876/ultralytics/Yolo/Neural-Network-combination/YOLO/Cup-bowl-detection-1/test/images
+train: /home/skl5876/ultralytics/Yolo/Neural-Network-combination/YOLO/Cup-bowl-detection-1/train/images
+val: /home/skl5876/ultralytics/Yolo/Neural-Network-combination/YOLO/Cup-bowl-detection-1/valid/images

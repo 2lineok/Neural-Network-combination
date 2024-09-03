@@ -56,7 +56,7 @@ degree = 3
 L=1
 space = PowerSeries(N=degree + 1,M=L)
 
-num_func=12000
+num_func=1200
 num_eval_points=400
 evaluation_points = np.linspace(0,1,num_eval_points, endpoint = True).reshape(num_eval_points,1)
 func_feats = space.random(num_func)
