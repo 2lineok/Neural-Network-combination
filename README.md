@@ -13,3 +13,12 @@ If we have input as image the output is both localization and classification of 
 
 If we have image
 
+<div align="center">
+  <img width="40%" src="https://raw.githubusercontent.com/2lineok/Neural-Network-combination/main/explanation/goat_image.jpg" style="display: inline-block; margin-right: 10px;">
+  <img width="40%" src="https://raw.githubusercontent.com/2lineok/Neural-Network-combination/main/explanation/goat_image_with_grid.jpg" style="display: inline-block;">
+</div>
+
+computer discretize this image to understand and use Convolutional neural network
+
+
+
