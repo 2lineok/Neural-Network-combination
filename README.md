@@ -7,5 +7,7 @@ One of the novel architectures emerging from this trend is the Deep Operator Net
 
 YOLO is a deep learning-based object detection model that can identify and locate objects within an image in a single forward pass through the network. Unlike traditional object detection methods that use a two-step approach (first generating region proposals and then classifying them), YOLO frames object detection as a single regression problem. This allows it to predict bounding boxes and class probabilities directly from full images with a single neural network evaluation, making it much faster than previous approaches.
 
+If we have input as image the output is both localization and classification of multiple objects within an image. YOLO achieves this by dividing the image into a grid and predicting bounding boxes and class labels for each grid cell. If multiple objects are present, YOLO predicts multiple bounding boxes and classifies each one. Thus, classification in YOLO is one part of the broader object detection task.
+
 
 
