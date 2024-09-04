@@ -1,0 +1,10 @@
+cuda:6
+N is 400
+number of data pairs y1 = 200
+number of data pairs ytest = 2000
+Epoch [1/100001], Loss: 0.9913856983184814
+total time is  0
+Epoch [10001/100001], Loss: 0.31329697370529175
+total time is  17.62794828414917
+Epoch [20001/100001], Loss: 0.20017372071743011
+total time is  34.9675772190094
