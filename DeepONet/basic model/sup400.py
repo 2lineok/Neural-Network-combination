@@ -156,7 +156,7 @@ tell=0
 
 total_time_task1=0
 time1=[]
-
+directory="/home/skl5876/Data_set/NN/"
 
 for epoch in range(num_epochs):
     start_time_task1 = time.time()
@@ -252,7 +252,7 @@ for epoch in range(num_epochs):
     yesntest1.append(criterion(aa[:,1:-1] ,bb[:,1:-1]).item())
     """
 
-
+    
 
     if epoch % 10000 == 0:
         print(f'Epoch [{epoch + 1}/{num_epochs}], Loss: {loss.item()}')
@@ -280,14 +280,14 @@ for epoch in range(num_epochs):
 
         #print("number of data pairs=",len(y))
         # Save the entire model
-
-        torch.save(model, 'deep_onet_modelsup.pth')
+        
+        torch.save(model, os.path.join(directory, 'deep_onet_modelsup.pth'))
 
         # Save the model's state dictionary (recommended)
-        torch.save(model.state_dict(), 'deep_onet_model_state_dictsup.pth')
+        torch.save(model.state_dict(), os.path.join(directory, 'deep_onet_model_state_dictsup.pth'))
 
         # Save the optimizer's state (optional)
-        torch.save(optimizer.state_dict(), 'deep_onet_optimizer_state_dictsup.pth')
+        torch.save(optimizer.state_dict(), os.path.join(directory, 'deep_onet_optimizer_state_dictsup.pth'))
 
 
 
@@ -315,13 +315,13 @@ for epoch in range(num_epochs):
             
             
             
-torch.save(model, 'deep_onet_modelsup.pth')
+torch.save(model, os.path.join(directory, 'deep_onet_modelsup.pth'))
 
 # Save the model's state dictionary (recommended)
-torch.save(model.state_dict(), 'deep_onet_model_state_dictsup.pth')
+torch.save(model.state_dict(), os.path.join(directory, 'deep_onet_model_state_dictsup.pth'))
 
 # Save the optimizer's state (optional)
-torch.save(optimizer.state_dict(), 'deep_onet_optimizer_state_dictsup.pth')
+torch.save(optimizer.state_dict(), os.path.join(directory, 'deep_onet_optimizer_state_dictsup.pth'))
 
 
 
@@ -332,16 +332,23 @@ class MyClass():
     def __init__(self, param):
         self.param = param
 
-def save_object(obj):
+def save_object(obj, directory, filename):
     try:
-        with open("data.sup", "wb") as f:
+        # Create the full path by concatenating the directory and filename
+        full_path = os.path.join(directory, filename)
+        with open(full_path, "wb") as f:
             pickle.dump(obj, f, protocol=pickle.HIGHEST_PROTOCOL)
     except Exception as ex:
         print("Error during pickling object (Possibly unsupported):", ex)
 
-obj = MyClass((yes,yesn,yes1,yesn1,yestest,yesntest,yestest1,yesntest1,yest,when,lamda,time1))
-save_object(obj)
+# Define the filename
+filename = 'data.sup'
 
+# Create the object
+obj = MyClass((yes, yesn, yes1, yesn1, yestest, yesntest, yestest1, yesntest1, yest, when, lamda, time1))
+
+# Save the object
+save_object(obj, directory, filename)
 
 
 
@@ -482,14 +489,14 @@ for epoch in range(num_epochs):
 
         #print("number of data pairs=",len(y))
         # Save the entire model
-
-        torch.save(model, 'deep_onet_modelsup.pth')
+        
+        torch.save(model, os.path.join(directory, 'deep_onet_modelsup.pth'))
 
         # Save the model's state dictionary (recommended)
-        torch.save(model.state_dict(), 'deep_onet_model_state_dictsup.pth')
+        torch.save(model.state_dict(), os.path.join(directory, 'deep_onet_model_state_dictsup.pth'))
 
         # Save the optimizer's state (optional)
-        torch.save(optimizer.state_dict(), 'deep_onet_optimizer_state_dictsup.pth')
+        torch.save(optimizer.state_dict(), os.path.join(directory, 'deep_onet_optimizer_state_dictsup.pth'))
 
 
 
@@ -517,13 +524,13 @@ for epoch in range(num_epochs):
             
             
             
-torch.save(model, 'deep_onet_modelsup.pth')
+torch.save(model, os.path.join(directory, 'deep_onet_modelsup.pth'))
 
 # Save the model's state dictionary (recommended)
-torch.save(model.state_dict(), 'deep_onet_model_state_dictsup.pth')
+torch.save(model.state_dict(), os.path.join(directory, 'deep_onet_model_state_dictsup.pth'))
 
 # Save the optimizer's state (optional)
-torch.save(optimizer.state_dict(), 'deep_onet_optimizer_state_dictsup.pth')
+torch.save(optimizer.state_dict(), os.path.join(directory, 'deep_onet_optimizer_state_dictsup.pth'))
 
 
 
@@ -534,15 +541,23 @@ class MyClass():
     def __init__(self, param):
         self.param = param
 
-def save_object(obj):
+def save_object(obj, directory, filename):
     try:
-        with open("data.sup", "wb") as f:
+        # Create the full path by concatenating the directory and filename
+        full_path = os.path.join(directory, filename)
+        with open(full_path, "wb") as f:
             pickle.dump(obj, f, protocol=pickle.HIGHEST_PROTOCOL)
     except Exception as ex:
         print("Error during pickling object (Possibly unsupported):", ex)
 
-obj = MyClass((yes,yesn,yes1,yesn1,yestest,yesntest,yestest1,yesntest1,yest,when,lamda,time1))
-save_object(obj)
+# Define the filename
+filename = 'data.sup'
+
+# Create the object
+obj = MyClass((yes, yesn, yes1, yesn1, yestest, yesntest, yestest1, yesntest1, yest, when, lamda, time1))
+
+# Save the object
+save_object(obj, directory, filename)
 
 
 
@@ -568,8 +583,7 @@ save_object(obj)
 
 
 
-
-
+"""
 
 
 num_epochs = 10000001
@@ -649,7 +663,7 @@ for epoch in range(num_epochs):
     yestest.append(criterion(outputstest, targetstest).item())
     yesntest.append(criterion(aa[:,1:-1] ,bb[:,1:-1]).item())
 
-    """
+
     outputstest1 = model(xtest1,xxtest1)  # inputs are your input data
     #print(outputs)
     x123=torch.transpose(outputstest1 , 0, 1).float()
@@ -664,7 +678,7 @@ for epoch in range(num_epochs):
 
     yestest1.append(criterion(outputstest1, targetstest1).item())
     yesntest1.append(criterion(aa[:,1:-1] ,bb[:,1:-1]).item())
-    """
+
 
 
 
@@ -756,3 +770,4 @@ def save_object(obj):
 obj = MyClass((yes,yesn,yes1,yesn1,yestest,yesntest,yestest1,yesntest1,yest,when,lamda,time1))
 save_object(obj)
 
+"""
