@@ -6,6 +6,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import time
 import pickle
+import os
 #device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 device = torch.device('cuda:0')
 print(device)
