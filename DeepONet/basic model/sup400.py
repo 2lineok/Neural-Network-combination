@@ -1,7 +1,6 @@
 import torch
 import torch.nn as nn
 import torch.optim as optim
-import os
 import math
 import numpy as np
 import matplotlib.pyplot as plt
@@ -9,7 +8,7 @@ import time
 import pickle
 import os
 #device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-device = torch.device('cuda:0')
+device = torch.device('cuda:5')
 print(device)
 class MyClass():
     def __init__(self, param):
@@ -612,5 +611,4 @@ def save_object(obj):
 obj = MyClass((yes,yesn,yes1,yesn1,yestest,yesntest,yestest1,yesntest1,yest,when,lamda,time1))
 save_object(obj)
 
-"""
 """
