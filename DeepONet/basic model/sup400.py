@@ -10,7 +10,18 @@ import os
 #device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 device = torch.device('cuda:0')
 print(device)
+class MyClass():
+    def __init__(self, param):
+        self.param = param
 
+def save_object(obj, directory, filename):
+    try:
+        # Create the full path by concatenating the directory and filename
+        full_path = os.path.join(directory, filename)
+        with open(full_path, "wb") as f:
+            pickle.dump(obj, f, protocol=pickle.HIGHEST_PROTOCOL)
+    except Exception as ex:
+        print("Error during pickling object (Possibly unsupported):", ex)
 class DeepOnet(nn.Module):
     def __init__(self, input_size, hidden_size, output_size,input_size1, hidden_size1, output_size1):
         super(DeepOnet, self).__init__()
@@ -45,26 +56,6 @@ model = DeepOnet(input_size, hidden_size, output_size,input_size1, hidden_size1,
 criterion = nn.MSELoss()  # You can choose an appropriate loss function
 #optimizer = optim.SGD(model.parameters(), lr=0.01)  # You can choose the optimizer and learning rate
 optimizer = optim.Adam(model.parameters(), lr=0.000001)
-
-"""
-d = np.load("1000train.npz", allow_pickle=True)
-train_x = (d["X"][0].astype(np.float32), d["X"][1].astype(np.float32))
-y = d["y"].astype(np.float32)
-x = train_x[0]
-xx = train_x[1]
-x = torch.from_numpy(x)
-xx = torch.from_numpy(xx)
-x = x.to(device)
-xx = xx.to(device)
-#xx = xx.clone().detach().requires_grad_(True)
-
-y = torch.from_numpy(y)
-y = y.to(device)
-targets=y
-#print(inputs)
-
-
-"""
 
 
 
@@ -113,22 +104,7 @@ ytest = ytest.to(device)
 targetstest=ytest
 
 
-"""
-d = np.load("1000test1.npz", allow_pickle=True)
-train_xtest1 = (d["X"][0].astype(np.float32), d["X"][1].astype(np.float32))
-ytest1 = d["y"].astype(np.float32)
-yytest1 = d["yy"].astype(np.float32)
-xtest1 = train_xtest1[0]
-xxtest1 = train_xtest1[1]
-xtest1 = torch.from_numpy(xtest1)
-xxtest1 = torch.from_numpy(xxtest1)
-xtest1 = xtest1.to(device)
-xxtest1 = xxtest1.to(device)
-#xx = xx.clone().detach().requires_grad_(True)
-ytest1 = torch.from_numpy(ytest1)
-ytest1 = ytest1.to(device)
-targetstest1=ytest1
-"""
+
 #print("number of data pairs y =",len(y))
 print("number of data pairs y1 =",len(y1))
 print("number of data pairs ytest =",len(ytest))
@@ -158,7 +134,8 @@ tell=0
 total_time_task1=0
 time1=[]
 directory="/home/skl5876/Data_set/NN/"
-
+# Define the filename
+filename = 'data.sup'
 for epoch in range(num_epochs):
     start_time_task1 = time.time()
     # Forward pass
@@ -177,39 +154,6 @@ for epoch in range(num_epochs):
     yes1.append(criterion(outputs1, targets1).item())
     yesn1.append(criterion(aa[:,1:-1] ,bb[:,1:-1]).item())
     
-    
-    
-    
-    #outputs = model(x,xx)  # inputs are your input data
-    #print(outputs)
-    #x123=torch.transpose(outputs , 0, 1).float()
-    #aa1=(A@x123)
-    #aa1=torch.transpose(aa1, 0, 1)
-    #aa=torch.mul(outputs,2*x)+aa1
-    #x223=torch.transpose(x , 0, 1).float()
-    #aa2=(A@x223)
-    #aa2=torch.transpose(aa2, 0, 1)
-    #bb=-aa2-torch.mul(x,x)
-    
-
-    #yes.append(criterion(outputs, targets).item())
-    #yesn.append(criterion(aa[:,1:-1] ,bb[:,1:-1]).item())
-
-    
-    
-    
-    
-    
-    
-    
-
-#    print(bb.size())
-    
-#    if epoch % 1000 == 0:
-#            print(f'Epoch [{epoch + 1}/{num_epochs}], Loss for compare: {loss.item()}')
-#+1000*(criterion( outputs[:,0],-x[:,0])+criterion( outputs[:,-1],-x[:,-1]+1)) # targets are your target values
-    
-
     
     loss =criterion(outputs1, targets1)  # targets are your target values
 
@@ -235,25 +179,6 @@ for epoch in range(num_epochs):
     yesntest.append(criterion(aa[:,1:-1] ,bb[:,1:-1]).item())
 
 
-    
-    """
-    outputstest1 = model(xtest1,xxtest1)  # inputs are your input data
-    #print(outputs)
-    x123=torch.transpose(outputstest1 , 0, 1).float()
-    aa1=(A@x123)
-    aa1=torch.transpose(aa1, 0, 1)
-    aa=torch.mul(outputstest1,2*xtest1)+aa1
-    x223=torch.transpose(xtest1 , 0, 1).float()
-    aa2=(A@x223)
-    aa2=torch.transpose(aa2, 0, 1)
-    bb=-aa2-torch.mul(xtest1,xtest1)
-    
-
-    yestest1.append(criterion(outputstest1, targetstest1).item())
-    yesntest1.append(criterion(aa[:,1:-1] ,bb[:,1:-1]).item())
-    """
-
-    
 
     if epoch % 10000 == 0:
         print(f'Epoch [{epoch + 1}/{num_epochs}], Loss: {loss.item()}')
@@ -294,21 +219,15 @@ for epoch in range(num_epochs):
 
 
 
-        import pickle
 
-        class MyClass():
-            def __init__(self, param):
-                self.param = param
 
-        def save_object(obj):
-            try:
-                with open("data.sup", "wb") as f:
-                    pickle.dump(obj, f, protocol=pickle.HIGHEST_PROTOCOL)
-            except Exception as ex:
-                print("Error during pickling object (Possibly unsupported):", ex)
 
-        obj = MyClass((yes,yesn,yes1,yesn1,yestest,yesntest,yestest1,yesntest1,yest,when,lamda,time1))
-        save_object(obj)
+
+        # Create the object
+        obj = MyClass((yes, yesn, yes1, yesn1, yestest, yesntest, yestest1, yesntest1, yest, when, lamda, time1))
+
+        # Save the object
+        save_object(obj, directory, filename)
 
     elapsed_time_task1 = time.time() - start_time_task1
     total_time_task1 += elapsed_time_task1
@@ -327,23 +246,7 @@ torch.save(optimizer.state_dict(), os.path.join(directory, 'deep_onet_optimizer_
 
 
 
-import pickle
 
-class MyClass():
-    def __init__(self, param):
-        self.param = param
-
-def save_object(obj, directory, filename):
-    try:
-        # Create the full path by concatenating the directory and filename
-        full_path = os.path.join(directory, filename)
-        with open(full_path, "wb") as f:
-            pickle.dump(obj, f, protocol=pickle.HIGHEST_PROTOCOL)
-    except Exception as ex:
-        print("Error during pickling object (Possibly unsupported):", ex)
-
-# Define the filename
-filename = 'data.sup'
 
 # Create the object
 obj = MyClass((yes, yesn, yes1, yesn1, yestest, yesntest, yestest1, yesntest1, yest, when, lamda, time1))
@@ -388,39 +291,6 @@ for epoch in range(num_epochs):
     yesn1.append(criterion(aa[:,1:-1] ,bb[:,1:-1]).item())
     
     
-    
-    
-    #outputs = model(x,xx)  # inputs are your input data
-    #print(outputs)
-    #x123=torch.transpose(outputs , 0, 1).float()
-    #aa1=(A@x123)
-    #aa1=torch.transpose(aa1, 0, 1)
-    #aa=torch.mul(outputs,2*x)+aa1
-    #x223=torch.transpose(x , 0, 1).float()
-    #aa2=(A@x223)
-    #aa2=torch.transpose(aa2, 0, 1)
-    #bb=-aa2-torch.mul(x,x)
-    
-
-    #yes.append(criterion(outputs, targets).item())
-    #yesn.append(criterion(aa[:,1:-1] ,bb[:,1:-1]).item())
-
-    
-    
-    
-    
-    
-    
-    
-
-#    print(bb.size())
-    
-#    if epoch % 1000 == 0:
-#            print(f'Epoch [{epoch + 1}/{num_epochs}], Loss for compare: {loss.item()}')
-#+1000*(criterion( outputs[:,0],-x[:,0])+criterion( outputs[:,-1],-x[:,-1]+1)) # targets are your target values
-    
-
-    
     loss =criterion(outputs1, targets1)  # targets are your target values
 
     # Backpropagation and optimization
@@ -443,24 +313,6 @@ for epoch in range(num_epochs):
 
     yestest.append(criterion(outputstest, targetstest).item())
     yesntest.append(criterion(aa[:,1:-1] ,bb[:,1:-1]).item())
-
-    """
-    outputstest1 = model(xtest1,xxtest1)  # inputs are your input data
-    #print(outputs)
-    x123=torch.transpose(outputstest1 , 0, 1).float()
-    aa1=(A@x123)
-    aa1=torch.transpose(aa1, 0, 1)
-    aa=torch.mul(outputstest1,2*xtest1)+aa1
-    x223=torch.transpose(xtest1 , 0, 1).float()
-    aa2=(A@x223)
-    aa2=torch.transpose(aa2, 0, 1)
-    bb=-aa2-torch.mul(xtest1,xtest1)
-    
-
-    yestest1.append(criterion(outputstest1, targetstest1).item())
-    yesntest1.append(criterion(aa[:,1:-1] ,bb[:,1:-1]).item())
-    """
-
 
 
 
@@ -503,21 +355,11 @@ for epoch in range(num_epochs):
 
 
 
-        import pickle
+        # Create the object
+        obj = MyClass((yes, yesn, yes1, yesn1, yestest, yesntest, yestest1, yesntest1, yest, when, lamda, time1))
 
-        class MyClass():
-            def __init__(self, param):
-                self.param = param
-
-        def save_object(obj):
-            try:
-                with open("data.sup", "wb") as f:
-                    pickle.dump(obj, f, protocol=pickle.HIGHEST_PROTOCOL)
-            except Exception as ex:
-                print("Error during pickling object (Possibly unsupported):", ex)
-
-        obj = MyClass((yes,yesn,yes1,yesn1,yestest,yesntest,yestest1,yesntest1,yest,when,lamda,time1))
-        save_object(obj)
+        # Save the object
+        save_object(obj, directory, filename)
 
     elapsed_time_task1 = time.time() - start_time_task1
     total_time_task1 += elapsed_time_task1
@@ -533,26 +375,6 @@ torch.save(model.state_dict(), os.path.join(directory, 'deep_onet_model_state_di
 # Save the optimizer's state (optional)
 torch.save(optimizer.state_dict(), os.path.join(directory, 'deep_onet_optimizer_state_dictsup.pth'))
 
-
-
-
-import pickle
-
-class MyClass():
-    def __init__(self, param):
-        self.param = param
-
-def save_object(obj, directory, filename):
-    try:
-        # Create the full path by concatenating the directory and filename
-        full_path = os.path.join(directory, filename)
-        with open(full_path, "wb") as f:
-            pickle.dump(obj, f, protocol=pickle.HIGHEST_PROTOCOL)
-    except Exception as ex:
-        print("Error during pickling object (Possibly unsupported):", ex)
-
-# Define the filename
-filename = 'data.sup'
 
 # Create the object
 obj = MyClass((yes, yesn, yes1, yesn1, yestest, yesntest, yestest1, yesntest1, yest, when, lamda, time1))
