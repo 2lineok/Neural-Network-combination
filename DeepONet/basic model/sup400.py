@@ -1,6 +1,7 @@
 import torch
 import torch.nn as nn
 import torch.optim as optim
+import os
 import math
 import numpy as np
 import matplotlib.pyplot as plt
@@ -208,11 +209,15 @@ for epoch in range(num_epochs):
         # Save the entire model
         
         torch.save(model, os.path.join(directory, 'deep_onet_modelsup.pth'))
+        
+        torch.save(model, os.path.join(directory, 'deep_onet_modelsup.pth'))
 
         # Save the model's state dictionary (recommended)
         torch.save(model.state_dict(), os.path.join(directory, 'deep_onet_model_state_dictsup.pth'))
+        torch.save(model.state_dict(), os.path.join(directory, 'deep_onet_model_state_dictsup.pth'))
 
         # Save the optimizer's state (optional)
+        torch.save(optimizer.state_dict(), os.path.join(directory, 'deep_onet_optimizer_state_dictsup.pth'))
         torch.save(optimizer.state_dict(), os.path.join(directory, 'deep_onet_optimizer_state_dictsup.pth'))
 
 
@@ -236,8 +241,10 @@ for epoch in range(num_epochs):
             
             
 torch.save(model, os.path.join(directory, 'deep_onet_modelsup.pth'))
+torch.save(model, os.path.join(directory, 'deep_onet_modelsup.pth'))
 
 # Save the model's state dictionary (recommended)
+torch.save(model.state_dict(), os.path.join(directory, 'deep_onet_model_state_dictsup.pth'))
 torch.save(model.state_dict(), os.path.join(directory, 'deep_onet_model_state_dictsup.pth'))
 
 # Save the optimizer's state (optional)
@@ -344,11 +351,15 @@ for epoch in range(num_epochs):
         # Save the entire model
         
         torch.save(model, os.path.join(directory, 'deep_onet_modelsup.pth'))
+        
+        torch.save(model, os.path.join(directory, 'deep_onet_modelsup.pth'))
 
         # Save the model's state dictionary (recommended)
         torch.save(model.state_dict(), os.path.join(directory, 'deep_onet_model_state_dictsup.pth'))
+        torch.save(model.state_dict(), os.path.join(directory, 'deep_onet_model_state_dictsup.pth'))
 
         # Save the optimizer's state (optional)
+        torch.save(optimizer.state_dict(), os.path.join(directory, 'deep_onet_optimizer_state_dictsup.pth'))
         torch.save(optimizer.state_dict(), os.path.join(directory, 'deep_onet_optimizer_state_dictsup.pth'))
 
 
@@ -368,8 +379,10 @@ for epoch in range(num_epochs):
             
             
 torch.save(model, os.path.join(directory, 'deep_onet_modelsup.pth'))
+torch.save(model, os.path.join(directory, 'deep_onet_modelsup.pth'))
 
 # Save the model's state dictionary (recommended)
+torch.save(model.state_dict(), os.path.join(directory, 'deep_onet_model_state_dictsup.pth'))
 torch.save(model.state_dict(), os.path.join(directory, 'deep_onet_model_state_dictsup.pth'))
 
 # Save the optimizer's state (optional)
@@ -382,7 +395,11 @@ obj = MyClass((yes, yesn, yes1, yesn1, yestest, yesntest, yestest1, yesntest1, y
 # Save the object
 save_object(obj, directory, filename)
 
+# Create the object
+obj = MyClass((yes, yesn, yes1, yesn1, yestest, yesntest, yestest1, yesntest1, yest, when, lamda, time1))
 
+# Save the object
+save_object(obj, directory, filename)
 
 
 
@@ -487,6 +504,7 @@ for epoch in range(num_epochs):
     yesntest.append(criterion(aa[:,1:-1] ,bb[:,1:-1]).item())
 
 
+
     outputstest1 = model(xtest1,xxtest1)  # inputs are your input data
     #print(outputs)
     x123=torch.transpose(outputstest1 , 0, 1).float()
@@ -501,6 +519,7 @@ for epoch in range(num_epochs):
 
     yestest1.append(criterion(outputstest1, targetstest1).item())
     yesntest1.append(criterion(aa[:,1:-1] ,bb[:,1:-1]).item())
+
 
 
 
@@ -593,4 +612,5 @@ def save_object(obj):
 obj = MyClass((yes,yesn,yes1,yesn1,yestest,yesntest,yestest1,yesntest1,yest,when,lamda,time1))
 save_object(obj)
 
+"""
 """

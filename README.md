@@ -17,6 +17,13 @@ YOLO(You Only Look Once) is a deep learning-based object detection model that ca
 
 If we have input as image the output is both localization and classification of multiple objects within an image. YOLO achieves this by dividing the image into a grid and predicting bounding boxes and class labels for each grid cell. If multiple objects are present, YOLO predicts multiple bounding boxes and classifies each one.
 
+
+<div align="center">
+  <img width="40%" src="https://raw.githubusercontent.com/2lineok/Neural-Network-combination/main/YOLO/data/3221.jpg" style="display: inline-block; margin-right: 10px;">
+  <img width="40%" src="https://raw.githubusercontent.com/2lineok/Neural-Network-combination/main/YOLO/runs/detect/predict2/3221.jpg" style="display: inline-block;">
+</div>
+
+
 # Combination of two methods
 
 Consider an image, which is essentially a continuous function representing pixel intensities over a two-dimensional grid. For computational purposes, this continuous image is discretized into a grid of pixels. This grid represents the image in a form that a neural network can process and perform object detection.
