@@ -107,25 +107,6 @@ ytest = ytest.to(device)
 targetstest=ytest
 
 
-"""
-
-d = np.load("1000test1.npz", allow_pickle=True)
-train_xtest1 = (d["X"][0].astype(np.float32), d["X"][1].astype(np.float32))
-ytest1 = d["y"].astype(np.float32)
-yytest1 = d["yy"].astype(np.float32)
-xtest1 = train_xtest1[0]
-xxtest1 = train_xtest1[1]
-xtest1 = torch.from_numpy(xtest1)
-xxtest1 = torch.from_numpy(xxtest1)
-xtest1 = xtest1.to(device)
-xxtest1 = xxtest1.to(device)
-#xx = xx.clone().detach().requires_grad_(True)
-ytest1 = torch.from_numpy(ytest1)
-ytest1 = ytest1.to(device)
-targetstest1=ytest1
-
-
-"""
 print("number of data pairs y =",len(y))
 print("number of data pairs y1 =",len(y1))
 print("number of data pairs ytest =",len(ytest))
@@ -199,13 +180,6 @@ for epoch in range(num_epochs):
     
     
 
-#    print(bb.size())
-    
-#    if epoch % 1000 == 0:
-#            print(f'Epoch [{epoch + 1}/{num_epochs}], Loss for compare: {loss.item()}')
-#+1000*(criterion( outputs[:,0],-x[:,0])+criterion( outputs[:,-1],-x[:,-1]+1)) # targets are your target values
-    
-
     
     loss = lamda*criterion(outputs1, targets1) +lamda*( criterion(aa[:,1:-1] ,bb[:,1:-1])+1000*(criterion( outputs[:,0],-x[:,0])+criterion( outputs[:,-1],-x[:,-1]+1)))  # targets are your target values
 
@@ -229,21 +203,6 @@ for epoch in range(num_epochs):
 
     yestest.append(criterion(outputstest, targetstest).item())
     yesntest.append(criterion(aa[:,1:-1] ,bb[:,1:-1]).item())
-
-    #outputstest1 = model(xtest1,xxtest1)  # inputs are your input data
-    #print(outputs)
-    #x123=torch.transpose(outputstest1 , 0, 1).float()
-    #aa1=(A@x123)
-    #aa1=torch.transpose(aa1, 0, 1)
-    #aa=torch.mul(outputstest1,2*xtest1)+aa1
-    #x223=torch.transpose(xtest1 , 0, 1).float()
-    #aa2=(A@x223)
-    #aa2=torch.transpose(aa2, 0, 1)
-    #bb=-aa2-torch.mul(xtest1,xtest1)
-    
-
-    #yestest1.append(criterion(outputstest1, targetstest1).item())
-    #yesntest1.append(criterion(aa[:,1:-1] ,bb[:,1:-1]).item())
 
 
     if epoch % 10000 == 0:
@@ -429,14 +388,7 @@ for epoch in range(num_epochs):
     
     
     
-    
 
-#    print(bb.size())
-    
-#    if epoch % 1000 == 0:
-#            print(f'Epoch [{epoch + 1}/{num_epochs}], Loss for compare: {loss.item()}')
-#+1000*(criterion( outputs[:,0],-x[:,0])+criterion( outputs[:,-1],-x[:,-1]+1)) # targets are your target values
-    
 
     
     loss = lamda*criterion(outputs1, targets1) +lamda*( criterion(aa[:,1:-1] ,bb[:,1:-1])+1000*(criterion( outputs[:,0],-x[:,0])+criterion( outputs[:,-1],-x[:,-1]+1)))  # targets are your target values
@@ -462,21 +414,7 @@ for epoch in range(num_epochs):
     yestest.append(criterion(outputstest, targetstest).item())
     yesntest.append(criterion(aa[:,1:-1] ,bb[:,1:-1]).item())
 
-    #outputstest1 = model(xtest1,xxtest1)  # inputs are your input data
-    #print(outputs)
-    #x123=torch.transpose(outputstest1 , 0, 1).float()
-    #aa1=(A@x123)
-    #aa1=torch.transpose(aa1, 0, 1)
-    #aa=torch.mul(outputstest1,2*xtest1)+aa1
-    #x223=torch.transpose(xtest1 , 0, 1).float()
-    #aa2=(A@x223)
-    #aa2=torch.transpose(aa2, 0, 1)
-    #bb=-aa2-torch.mul(xtest1,xtest1)
-    
-
-    #yestest1.append(criterion(outputstest1, targetstest1).item())
-    #yesntest1.append(criterion(aa[:,1:-1] ,bb[:,1:-1]).item())
-
+   
 
 
 

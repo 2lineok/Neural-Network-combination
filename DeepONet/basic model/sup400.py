@@ -436,24 +436,6 @@ for epoch in range(num_epochs):
     yestest.append(criterion(outputstest, targetstest).item())
     yesntest.append(criterion(aa[:,1:-1] ,bb[:,1:-1]).item())
 
-    """
-    outputstest1 = model(xtest1,xxtest1)  # inputs are your input data
-    #print(outputs)
-    x123=torch.transpose(outputstest1 , 0, 1).float()
-    aa1=(A@x123)
-    aa1=torch.transpose(aa1, 0, 1)
-    aa=torch.mul(outputstest1,2*xtest1)+aa1
-    x223=torch.transpose(xtest1 , 0, 1).float()
-    aa2=(A@x223)
-    aa2=torch.transpose(aa2, 0, 1)
-    bb=-aa2-torch.mul(xtest1,xtest1)
-    
-
-    yestest1.append(criterion(outputstest1, targetstest1).item())
-    yesntest1.append(criterion(aa[:,1:-1] ,bb[:,1:-1]).item())
-    """
-
-
 
 
     if epoch % 10000 == 0:
@@ -594,36 +576,6 @@ for epoch in range(num_epochs):
     
     
     
-    
-    #outputs = model(x,xx)  # inputs are your input data
-    #print(outputs)
-    #x123=torch.transpose(outputs , 0, 1).float()
-    #aa1=(A@x123)
-    #aa1=torch.transpose(aa1, 0, 1)
-    #aa=torch.mul(outputs,2*x)+aa1
-    #x223=torch.transpose(x , 0, 1).float()
-    #aa2=(A@x223)
-    #aa2=torch.transpose(aa2, 0, 1)
-    #bb=-aa2-torch.mul(x,x)
-    
-
-    #yes.append(criterion(outputs, targets).item())
-    #yesn.append(criterion(aa[:,1:-1] ,bb[:,1:-1]).item())
-
-    
-    
-    
-    
-    
-    
-    
-
-#    print(bb.size())
-    
-#    if epoch % 1000 == 0:
-#            print(f'Epoch [{epoch + 1}/{num_epochs}], Loss for compare: {loss.item()}')
-#+1000*(criterion( outputs[:,0],-x[:,0])+criterion( outputs[:,-1],-x[:,-1]+1)) # targets are your target values
-    
 
     
     loss =criterion(outputs1, targets1)  # targets are your target values
@@ -649,22 +601,6 @@ for epoch in range(num_epochs):
     yestest.append(criterion(outputstest, targetstest).item())
     yesntest.append(criterion(aa[:,1:-1] ,bb[:,1:-1]).item())
 
-    """
-    outputstest1 = model(xtest1,xxtest1)  # inputs are your input data
-    #print(outputs)
-    x123=torch.transpose(outputstest1 , 0, 1).float()
-    aa1=(A@x123)
-    aa1=torch.transpose(aa1, 0, 1)
-    aa=torch.mul(outputstest1,2*xtest1)+aa1
-    x223=torch.transpose(xtest1 , 0, 1).float()
-    aa2=(A@x223)
-    aa2=torch.transpose(aa2, 0, 1)
-    bb=-aa2-torch.mul(xtest1,xtest1)
-    
-
-    yestest1.append(criterion(outputstest1, targetstest1).item())
-    yesntest1.append(criterion(aa[:,1:-1] ,bb[:,1:-1]).item())
-    """
 
 
 
