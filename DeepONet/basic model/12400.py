@@ -6,10 +6,22 @@ import numpy as np
 import matplotlib.pyplot as plt
 import time
 import pickle
+import os
 #device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 device = torch.device('cuda:1')
 print(device)
+class MyClass():
+    def __init__(self, param):
+        self.param = param
 
+def save_object(obj, directory, filename):
+    try:
+        # Create the full path by concatenating the directory and filename
+        full_path = os.path.join(directory, filename)
+        with open(full_path, "wb") as f:
+            pickle.dump(obj, f, protocol=pickle.HIGHEST_PROTOCOL)
+    except Exception as ex:
+        print("Error during pickling object (Possibly unsupported):", ex)
 class DeepOnet(nn.Module):
     def __init__(self, input_size, hidden_size, output_size,input_size1, hidden_size1, output_size1):
         super(DeepOnet, self).__init__()
@@ -74,7 +86,9 @@ targets=y
 print("N is", N)
 
 
-
+directory="/home/skl5876/Data_set/NN/"
+# Define the filename
+filename = 'data.12400'
 
 d = np.load("100train.npz", allow_pickle=True)
 x1 = (d["x"].astype(np.float32))
@@ -235,33 +249,19 @@ for epoch in range(num_epochs):
         #print("number of data pairs=",len(y))
         # Save the entire model
 
-        torch.save(model, 'deep_onet_modelch12.pth')
+        torch.save(model, os.path.join(directory,'deep_onet_modelch12.pth'))
 
         # Save the model's state dictionary (recommended)
-        torch.save(model.state_dict(), 'deep_onet_model_state_dictch12.pth')
+        torch.save(model.state_dict(), os.path.join(directory,  'deep_onet_model_state_dictch12.pth'))
 
         # Save the optimizer's state (optional)
-        torch.save(optimizer.state_dict(), 'deep_onet_optimizer_state_dictch12.pth')
+        torch.save(optimizer.state_dict(), os.path.join(directory, 'deep_onet_optimizer_state_dictch12.pth'))
 
-
-
-
-
-        
-
-        class MyClass():
-            def __init__(self, param):
-                self.param = param
-
-        def save_object(obj):
-            try:
-                with open("data.10ch12", "wb") as f:
-                    pickle.dump(obj, f, protocol=pickle.HIGHEST_PROTOCOL)
-            except Exception as ex:
-                print("Error during pickling object (Possibly unsupported):", ex)
 
         obj = MyClass((yes,yesn,yes1,yesn1,yestest,yesntest,yestest1,yesntest1,yest,when,lamda,time1))
-        save_object(obj)
+        # Save the object
+        save_object(obj, directory, filename)
+
 
 
     elapsed_time_task1 = time.time() - start_time_task1
@@ -271,36 +271,18 @@ for epoch in range(num_epochs):
     
     
     
-    
-            
-torch.save(model, 'deep_onet_modelch12.pth')
+torch.save(model, os.path.join(directory,'deep_onet_modelch12.pth'))
 
 # Save the model's state dictionary (recommended)
-torch.save(model.state_dict(), 'deep_onet_model_state_dictch12.pth')
+torch.save(model.state_dict(), os.path.join(directory,  'deep_onet_model_state_dictch12.pth'))
 
 # Save the optimizer's state (optional)
-torch.save(optimizer.state_dict(), 'deep_onet_optimizer_state_dictch12.pth')
+torch.save(optimizer.state_dict(), os.path.join(directory, 'deep_onet_optimizer_state_dictch12.pth'))
 
-
-
-
-import pickle
-
-class MyClass():
-    def __init__(self, param):
-        self.param = param
-
-def save_object(obj):
-    try:
-        with open("data.10ch12", "wb") as f:
-            pickle.dump(obj, f, protocol=pickle.HIGHEST_PROTOCOL)
-    except Exception as ex:
-        print("Error during pickling object (Possibly unsupported):", ex)
 
 obj = MyClass((yes,yesn,yes1,yesn1,yestest,yesntest,yestest1,yesntest1,yest,when,lamda,time1))
-save_object(obj)
-
-
+# Save the object
+save_object(obj, directory, filename)
 
 
 
@@ -448,33 +430,18 @@ for epoch in range(num_epochs):
         #print("number of data pairs=",len(y))
         # Save the entire model
 
-        torch.save(model, 'deep_onet_modelch12.pth')
+        torch.save(model, os.path.join(directory,'deep_onet_modelch12.pth'))
 
         # Save the model's state dictionary (recommended)
-        torch.save(model.state_dict(), 'deep_onet_model_state_dictch12.pth')
+        torch.save(model.state_dict(), os.path.join(directory,  'deep_onet_model_state_dictch12.pth'))
 
         # Save the optimizer's state (optional)
-        torch.save(optimizer.state_dict(), 'deep_onet_optimizer_state_dictch12.pth')
+        torch.save(optimizer.state_dict(), os.path.join(directory, 'deep_onet_optimizer_state_dictch12.pth'))
 
-
-
-
-
-        
-
-        class MyClass():
-            def __init__(self, param):
-                self.param = param
-
-        def save_object(obj):
-            try:
-                with open("data.10ch12", "wb") as f:
-                    pickle.dump(obj, f, protocol=pickle.HIGHEST_PROTOCOL)
-            except Exception as ex:
-                print("Error during pickling object (Possibly unsupported):", ex)
 
         obj = MyClass((yes,yesn,yes1,yesn1,yestest,yesntest,yestest1,yesntest1,yest,when,lamda,time1))
-        save_object(obj)
+        # Save the object
+        save_object(obj, directory, filename)
 
 
     elapsed_time_task1 = time.time() - start_time_task1
@@ -486,292 +453,15 @@ for epoch in range(num_epochs):
     
     
             
-torch.save(model, 'deep_onet_modelch12.pth')
+torch.save(model, os.path.join(directory,'deep_onet_modelch12.pth'))
 
 # Save the model's state dictionary (recommended)
-torch.save(model.state_dict(), 'deep_onet_model_state_dictch12.pth')
+torch.save(model.state_dict(), os.path.join(directory,  'deep_onet_model_state_dictch12.pth'))
 
 # Save the optimizer's state (optional)
-torch.save(optimizer.state_dict(), 'deep_onet_optimizer_state_dictch12.pth')
+torch.save(optimizer.state_dict(), os.path.join(directory, 'deep_onet_optimizer_state_dictch12.pth'))
 
-
-
-
-import pickle
-
-class MyClass():
-    def __init__(self, param):
-        self.param = param
-
-def save_object(obj):
-    try:
-        with open("data.10ch12", "wb") as f:
-            pickle.dump(obj, f, protocol=pickle.HIGHEST_PROTOCOL)
-    except Exception as ex:
-        print("Error during pickling object (Possibly unsupported):", ex)
 
 obj = MyClass((yes,yesn,yes1,yesn1,yestest,yesntest,yestest1,yesntest1,yest,when,lamda,time1))
-save_object(obj)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-num_epochs =300000001
-optimizer = optim.Adam(model.parameters(), lr=0.0000001)
-for epoch in range(num_epochs):
-    start_time_task1 = time.time()
-    # Forward pass
-    outputs1 = model(x1,xx1)  # inputs are your input data
-    #print(outputs)
-    x123=torch.transpose(outputs1 , 0, 1).float()
-    aa1=(A@x123)
-    aa1=torch.transpose(aa1, 0, 1)
-    aa=torch.mul(outputs1,2*x1)+aa1
-    x223=torch.transpose(x1 , 0, 1).float()
-    aa2=(A@x223)
-    aa2=torch.transpose(aa2, 0, 1)
-    bb=-aa2-torch.mul(x1,x1)
-    
-
-    yes1.append(criterion(outputs1, targets1).item())
-    yesn1.append(criterion(aa[:,1:-1] ,bb[:,1:-1]).item())
-    
-    
-    
-    
-    outputs = model(x,xx)  # inputs are your input data
-    #print(outputs)
-    x123=torch.transpose(outputs , 0, 1).float()
-    aa1=(A@x123)
-    aa1=torch.transpose(aa1, 0, 1)
-    aa=torch.mul(outputs,2*x)+aa1
-    x223=torch.transpose(x , 0, 1).float()
-    aa2=(A@x223)
-    aa2=torch.transpose(aa2, 0, 1)
-    bb=-aa2-torch.mul(x,x)
-    
-
-    yes.append(criterion(outputs, targets).item())
-    yesn.append(criterion(aa[:,1:-1] ,bb[:,1:-1]).item())
-
-    
-    
-    
-    
-    
-    
-    
-
-#    print(bb.size())
-    
-#    if epoch % 1000 == 0:
-#            print(f'Epoch [{epoch + 1}/{num_epochs}], Loss for compare: {loss.item()}')
-#+1000*(criterion( outputs[:,0],-x[:,0])+criterion( outputs[:,-1],-x[:,-1]+1)) # targets are your target values
-    
-
-    
-    loss = lamda*criterion(outputs1, targets1) +lamda*( criterion(aa[:,1:-1] ,bb[:,1:-1])+1000*(criterion( outputs[:,0],-x[:,0])+criterion( outputs[:,-1],-x[:,-1]+1)))  # targets are your target values
-
-    # Backpropagation and optimization
-    optimizer.zero_grad()
-    loss.backward()
-    optimizer.step()
-    yest.append(loss.item())
-    
-    outputstest = model(xtest,xxtest)  # inputs are your input data
-    #print(outputs)
-    x123=torch.transpose(outputstest , 0, 1).float()
-    aa1=(A@x123)
-    aa1=torch.transpose(aa1, 0, 1)
-    aa=torch.mul(outputstest,2*xtest)+aa1
-    x223=torch.transpose(xtest , 0, 1).float()
-    aa2=(A@x223)
-    aa2=torch.transpose(aa2, 0, 1)
-    bb=-aa2-torch.mul(xtest,xtest)
-    
-
-    yestest.append(criterion(outputstest, targetstest).item())
-    yesntest.append(criterion(aa[:,1:-1] ,bb[:,1:-1]).item())
-
-
-    #outputstest1 = model(xtest1,xxtest1)  # inputs are your input data
-    #print(outputs)
-    #x123=torch.transpose(outputstest1 , 0, 1).float()
-    #aa1=(A@x123)
-    #aa1=torch.transpose(aa1, 0, 1)
-    #aa=torch.mul(outputstest1,2*xtest1)+aa1
-    #x223=torch.transpose(xtest1 , 0, 1).float()
-    #aa2=(A@x223)
-    #aa2=torch.transpose(aa2, 0, 1)
-    #bb=-aa2-torch.mul(xtest1,xtest1)
-    
-
-    #yestest1.append(criterion(outputstest1, targetstest1).item())
-    #yesntest1.append(criterion(aa[:,1:-1] ,bb[:,1:-1]).item())
-
-
-
-    if epoch % 10000 == 0:
-        print(f'Epoch [{epoch + 1}/{num_epochs}], Loss: {loss.item()}')
-
-        print("total time is ",total_time_task1)
-
-        plt.plot(yes, label="'MSE_loss'")
-        plt.plot(yesn, label="'Newton_loss'")
-        plt.plot(yes1, label="'MSE_loss1'")
-        plt.plot(yesn1, label="'Newton_loss1'")
-        plt.plot(yestest, label="'MSE_losstest'")
-        plt.plot(yesntest, label="'Newton_losstest'")
-        plt.plot(yestest1, label="'MSE_losstest1'")
-        plt.plot(yesntest1, label="'Newton_losstest1'")
-        plt.plot(yest, label="'Train_loss'")
-        plt.vlines(x = when, ymin = min(min(yes),min(yesn)) , ymax = max(max(yes),max(yesn)), color = 'b')
-        plt.legend(loc="upper left")
-        plt.yscale("log")
-        plt.legend()
-        plt.legend(loc='upper left')
-        plt.show()
-
-
-
-
-
-
-
-        #print("number of data pairs=",len(y))
-        # Save the entire model
-
-        torch.save(model, 'deep_onet_modelch12.pth')
-
-        # Save the model's state dictionary (recommended)
-        torch.save(model.state_dict(), 'deep_onet_model_state_dictch12.pth')
-
-        # Save the optimizer's state (optional)
-        torch.save(optimizer.state_dict(), 'deep_onet_optimizer_state_dictch12.pth')
-
-
-
-
-
-        
-
-        class MyClass():
-            def __init__(self, param):
-                self.param = param
-
-        def save_object(obj):
-            try:
-                with open("data.10ch12", "wb") as f:
-                    pickle.dump(obj, f, protocol=pickle.HIGHEST_PROTOCOL)
-            except Exception as ex:
-                print("Error during pickling object (Possibly unsupported):", ex)
-
-        obj = MyClass((yes,yesn,yes1,yesn1,yestest,yesntest,yestest1,yesntest1,yest,when,lamda,time1))
-        save_object(obj)
-
-
-    elapsed_time_task1 = time.time() - start_time_task1
-    total_time_task1 += elapsed_time_task1
-    time1.append(total_time_task1)
-    
-    
-    
-    
-    
-            
-torch.save(model, 'deep_onet_modelch12.pth')
-
-# Save the model's state dictionary (recommended)
-torch.save(model.state_dict(), 'deep_onet_model_state_dictch12.pth')
-
-# Save the optimizer's state (optional)
-torch.save(optimizer.state_dict(), 'deep_onet_optimizer_state_dictch12.pth')
-
-
-
-
-import pickle
-
-class MyClass():
-    def __init__(self, param):
-        self.param = param
-
-def save_object(obj):
-    try:
-        with open("data.10ch12", "wb") as f:
-            pickle.dump(obj, f, protocol=pickle.HIGHEST_PROTOCOL)
-    except Exception as ex:
-        print("Error during pickling object (Possibly unsupported):", ex)
-
-obj = MyClass((yes,yesn,yes1,yesn1,yestest,yesntest,yestest1,yesntest1,yest,when,lamda,time1))
-save_object(obj)
+# Save the object
+save_object(obj, directory, filename)
