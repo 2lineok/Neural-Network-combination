@@ -19,7 +19,7 @@ If we have input as image the output is both localization and classification of 
 
 
 <div align="center">
-  <img width="40%" src="https://raw.githubusercontent.com/2lineok/Neural-Network-combination/main/YOLO/data/3221.jpg" style="display: inline-block; margin-right: 10px;">
+  <img width="40%" src="https://raw.githubusercontent.com/2lineok/Neural-Network-combination/main/YOLO/Cup-bowl-detection-1/data/3221.jpg" style="display: inline-block; margin-right: 10px;">
   <img width="40%" src="https://raw.githubusercontent.com/2lineok/Neural-Network-combination/main/YOLO/runs/detect/predict2/3221.jpg" style="display: inline-block;">
 </div>
 
